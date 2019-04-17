@@ -72,6 +72,7 @@
             this.barbtnThoat = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonMiniToolbar1 = new DevExpress.XtraBars.Ribbon.RibbonMiniToolbar(this.components);
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -80,6 +81,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            this.lblWelcome = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
@@ -163,6 +166,7 @@
             this.gctrlDSach.TabIndex = 0;
             this.gctrlDSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDSach});
+            this.gctrlDSach.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.PreviewKeyDown_gctrlDsach);
             // 
             // grvDSach
             // 
@@ -185,6 +189,7 @@
             this.TENKHO2,
             this.DGIAI,
             this.DONE});
+            this.grvDSach.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.grvDSach.GridControl = this.gctrlDSach;
             this.grvDSach.Name = "grvDSach";
             this.grvDSach.OptionsBehavior.Editable = false;
@@ -409,7 +414,7 @@
             this.btnPreview.Size = new System.Drawing.Size(89, 59);
             this.btnPreview.TabIndex = 11;
             this.btnPreview.Text = "PREVIEW";
-            this.btnPreview.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // labelControl1
             // 
@@ -581,9 +586,10 @@
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
-            this.barButtonItem1});
+            this.barButtonItem1,
+            this.barStaticItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 5;
+            this.ribbonControl1.MaxItemId = 8;
             this.ribbonControl1.MiniToolbars.Add(this.ribbonMiniToolbar1);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -597,6 +603,11 @@
             this.barButtonItem1.Caption = "barButtonItem1";
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Id = 5;
+            this.barStaticItem1.Name = "barStaticItem1";
             // 
             // ribbonPage1
             // 
@@ -656,11 +667,31 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 564);
             // 
+            // barEditItem1
+            // 
+            this.barEditItem1.Edit = null;
+            this.barEditItem1.Id = -1;
+            this.barEditItem1.Name = "barEditItem1";
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWelcome.Appearance.Font = new System.Drawing.Font("UTM Androgyne", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Appearance.Options.UseFont = true;
+            this.lblWelcome.Location = new System.Drawing.Point(849, 26);
+            this.lblWelcome.LookAndFeel.SkinName = "Seven Classic";
+            this.lblWelcome.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(101, 18);
+            this.lblWelcome.TabIndex = 18;
+            this.lblWelcome.Text = "-------------------------";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 564);
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.teKhonhap);
             this.Controls.Add(this.labelControl4);
@@ -688,6 +719,7 @@
             this.Text = "BARCODE LABEL";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_Closing);
             this.Load += new System.EventHandler(this.Form2_Load);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.PreviewKeyDown_Form2);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
@@ -765,5 +797,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.Ribbon.RibbonMiniToolbar ribbonMiniToolbar1;
         private DevExpress.XtraEditors.SimpleButton btnPreview;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private DevExpress.XtraBars.BarEditItem barEditItem1;
+        private DevExpress.XtraEditors.LabelControl lblWelcome;
     }
 }

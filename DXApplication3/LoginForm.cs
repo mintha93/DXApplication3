@@ -16,6 +16,8 @@ namespace DXApplication3
     public partial class frmLogin : DevExpress.XtraEditors.XtraForm
     {
         clBUS _BUS = new clBUS();
+        string userName_frmLogin = "";
+        int priority_frmLogin =0;
         public frmLogin()
         {
             InitializeComponent();
@@ -46,12 +48,33 @@ namespace DXApplication3
                 try
                 {
        
-                    if (_BUS.CreateMD5(tePassword.EditValue.ToString()).ToLower() == _BUS.GET_Password(teUsername.EditValue.ToString()))
+                    //if (_BUS.CreateMD5(tePassword.EditValue.ToString()).ToLower() == _BUS.GET_Password(teUsername.EditValue.ToString()))
+                    //{
+                    //    this.Hide();
+                    //    var form2 = new Form2();
+                    //    form2.Closed += (s, args) => this.Close();
+                    //    form2.Show();
+                    //}
+                    //else
+                    if (_BUS.getPriorityFromFileText(teUsername.EditValue.ToString(), tePassword.EditValue.ToString()) == 1)
                     {
+                        Form2 frm2 = new Form2();
+                        userName_frmLogin = teUsername.EditValue.ToString();
+                        priority_frmLogin = 1;
+                        frm2.PassvaluefromFormLogin(userName_frmLogin, priority_frmLogin);
                         this.Hide();
-                        var form2 = new Form2();
-                        form2.Closed += (s, args) => this.Close();
-                        form2.Show();
+                        frm2.Closed += (s, args) => this.Close();
+                        frm2.Show();
+                    }
+                    else if (_BUS.getPriorityFromFileText(teUsername.EditValue.ToString(), tePassword.EditValue.ToString()) == 2)
+                    {
+                        Form2 frm2 = new Form2();
+                        userName_frmLogin = teUsername.EditValue.ToString();
+                        priority_frmLogin = 2;
+                        frm2.PassvaluefromFormLogin(userName_frmLogin, priority_frmLogin);
+                        this.Hide();
+                        frm2.Closed += (s, args) => this.Close();
+                        frm2.Show();
                     }
                     else
                     {
@@ -71,12 +94,33 @@ namespace DXApplication3
             {
                 try
                 {
-                    if (_BUS.CreateMD5(tePassword.EditValue.ToString()).ToLower() == _BUS.GET_Password(teUsername.EditValue.ToString()))
+                    //if (_BUS.CreateMD5(tePassword.EditValue.ToString()).ToLower() == _BUS.GET_Password(teUsername.EditValue.ToString()))
+                    //{
+                    //    this.Hide();
+                    //    var form2 = new Form2();
+                    //    form2.Closed += (s, args) => this.Close();
+                    //    form2.Show();
+                    //}
+                    //else
+                    if (_BUS.getPriorityFromFileText(teUsername.EditValue.ToString(), tePassword.EditValue.ToString()) == 1)
                     {
+                        Form2 frm2 = new Form2();
+                        userName_frmLogin = teUsername.EditValue.ToString();
+                        priority_frmLogin = 1;
+                        frm2.PassvaluefromFormLogin(userName_frmLogin, priority_frmLogin);
                         this.Hide();
-                        var form2 = new Form2();
-                        form2.Closed += (s, args) => this.Close();
-                        form2.Show();
+                        frm2.Closed += (s, args) => this.Close();
+                        frm2.Show();
+                    }
+                    else if (_BUS.getPriorityFromFileText(teUsername.EditValue.ToString(), tePassword.EditValue.ToString()) == 2)
+                    {
+                        Form2 frm2 = new Form2();
+                        userName_frmLogin = teUsername.EditValue.ToString();
+                        priority_frmLogin = 2;
+                        frm2.PassvaluefromFormLogin(userName_frmLogin, priority_frmLogin);
+                        this.Hide();
+                        frm2.Closed += (s, args) => this.Close();
+                        frm2.Show();
                     }
                     else
                     {
@@ -110,12 +154,33 @@ namespace DXApplication3
             {
 
 
-                if (_BUS.CreateMD5(tePassword.EditValue.ToString()).ToLower() == _BUS.GET_Password(teUsername.EditValue.ToString()))
+                //if (_BUS.CreateMD5(tePassword.EditValue.ToString()).ToLower() == _BUS.GET_Password(teUsername.EditValue.ToString()))
+                //{
+                //    this.Hide();
+                //    var form2 = new Form2();
+                //    form2.Closed += (s, args) => this.Close();
+                //    form2.Show();
+                //}
+                //else
+                if (_BUS.getPriorityFromFileText(teUsername.EditValue.ToString(), tePassword.EditValue.ToString()) == 1)
                 {
+                    Form2 frm2 = new Form2();
+                    userName_frmLogin = teUsername.EditValue.ToString();
+                    priority_frmLogin = 1;
+                    frm2.PassvaluefromFormLogin(userName_frmLogin, priority_frmLogin);
                     this.Hide();
-                    var form2 = new Form2();
-                    form2.Closed += (s, args) => this.Close();
-                    form2.Show();
+                    frm2.Closed += (s, args) => this.Close();
+                    frm2.Show();
+                }
+                else if (_BUS.getPriorityFromFileText(teUsername.EditValue.ToString(), tePassword.EditValue.ToString()) == 2)
+                {
+                    Form2 frm2 = new Form2();
+                    userName_frmLogin = teUsername.EditValue.ToString();
+                    priority_frmLogin = 2;
+                    frm2.PassvaluefromFormLogin(userName_frmLogin, priority_frmLogin);
+                    this.Hide();
+                    frm2.Closed += (s, args) => this.Close();
+                    frm2.Show();
                 }
                 else
                 {

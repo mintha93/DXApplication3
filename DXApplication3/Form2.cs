@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace DXApplication3
         int SoReport_Frm2 = 0;
         string SCT_Frm2 = "";
         int Makho_Frm2 = 0;
+        string userName_frm2;
+        int priority_frm2;
         clBUS _BUS = new clBUS();
         public Form2()
         {
@@ -32,7 +35,6 @@ namespace DXApplication3
             try
             {
                 gctrlDSach.DataSource = _BUS.getVCNB(dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
-                // grvDSach.BestFitColumns();
             }
             catch (Exception ex)
             {
@@ -45,7 +47,6 @@ namespace DXApplication3
             try
             {
                 gctrlDSach.DataSource = _BUS.getVCNB(dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
-                // grvDSach.BestFitColumns();
             }
             catch (Exception ex)
             {
@@ -74,7 +75,6 @@ namespace DXApplication3
                 teSCT.EditValue = grvDSach.GetFocusedRowCellValue("SCT").ToString();
                 teKhoxuat.EditValue = grvDSach.GetFocusedRowCellValue("TENKHO").ToString();
                 teKhonhap.EditValue = grvDSach.GetFocusedRowCellValue("TENKHO2").ToString();
-                //MessageBox.Show(grvDSach.GetFocusedRowCellValue("TENKHO").ToString());
             }
             catch
             {
@@ -89,7 +89,6 @@ namespace DXApplication3
                 tabControl.SelectedTabPage = tabPageDT;
                 GIABAN_VND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvDetail);
                 GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
-                // grvDetail.BestFitColumns();
             }
             catch (Exception ex)
             {
@@ -101,7 +100,6 @@ namespace DXApplication3
         {
             gctrlDSach.DataSource = _BUS.getVCNB_Search(teSearchSCT.EditValue.ToString(), dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
             tabControl.SelectedTabPage = tabPageDS;
-            // grvDSach.BestFitColumns();
         }
         private void Form2_Closing(object sender, FormClosingEventArgs e)
         {
@@ -118,11 +116,11 @@ namespace DXApplication3
                 dEdateto.EditValue = DateTime.Now;
                 dEdatefrom.EditValue = DateTime.Now.AddDays(-10);
                 gctrlDSach.DataSource = _BUS.getVCNB(dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
-                //  grvDSach.BestFitColumns();
                 grvDSach.Columns[4].Visible = false;
                 grvDSach.Columns[6].Visible = false;
                 GIABAN_VND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvDetail);
                 GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
+                lblWelcome.Text = "Hi "+userName_frm2+" !";
             }
             catch (Exception ex)
             {
@@ -152,51 +150,15 @@ namespace DXApplication3
         private void btnIntemle(object sender, EventArgs e)
         {
             Form3 form3 = new Form3();
+            form3.PassvaluefromForm2(userName_frm2, priority_frm2);
             form3.Show();
-            this.Hide();
         }
-
-        private void btnPreview_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                SoReport_Frm2 = 1;
-                SCT_Frm2 = grvDSach.GetFocusedRowCellDisplayText("SCT");
-                Makho_Frm2 = Convert.ToInt16(grvDSach.GetFocusedRowCellDisplayText("MAKHO2"));
-                Form1 form1 = new Form1();
-                form1.PassvaluefromForm2(SCT_Frm2, Makho_Frm2, SoReport_Frm2);
-                form1.Show();
-                this.Hide();
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
         private void barbtnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Environment.Exit(0);
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                SoReport_Frm2 = 1;
-                SCT_Frm2 = grvDSach.GetFocusedRowCellDisplayText("SCT");
-                Makho_Frm2 = Convert.ToInt16(grvDSach.GetFocusedRowCellDisplayText("MAKHO2"));
-                Form1 form1 = new Form1();
-                form1.PassvaluefromForm2(SCT_Frm2, Makho_Frm2, SoReport_Frm2);
-                form1.Show();
-                this.Hide();
-            }
-            catch (Exception)
-            {
-
-            }
-        }
+    
 
         private void grvDSach_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
@@ -204,6 +166,61 @@ namespace DXApplication3
             teKhoxuat.EditValue = grvDSach.GetFocusedRowCellDisplayText("TENKHO");
             teKhonhap.EditValue = grvDSach.GetFocusedRowCellDisplayText("TENKHO2");
 
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SoReport_Frm2 = 1;
+                SCT_Frm2 = grvDSach.GetFocusedRowCellDisplayText("SCT");
+                Makho_Frm2 = Convert.ToInt16(grvDSach.GetFocusedRowCellDisplayText("MAKHO2"));
+                Form1 form1 = new Form1();
+                form1.PassvaluefromForm2(SCT_Frm2, Makho_Frm2, SoReport_Frm2,userName_frm2,priority_frm2);
+                form1.Show();
+                //this.Hide();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        private void PreviewKeyDown_gctrlDsach(object sender, PreviewKeyDownEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.F5)
+            {
+                try
+                {
+                    gctrlDSach.DataSource = _BUS.getVCNB(dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void PreviewKeyDown_Form2(object sender, PreviewKeyDownEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.F5)
+            {
+                try
+                {
+                    gctrlDSach.DataSource = _BUS.getVCNB(dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+
+        public void PassvaluefromFormLogin(string userName, int priority)
+        {
+            userName_frm2 = userName;
+            priority_frm2 = priority;
         }
     }
 }

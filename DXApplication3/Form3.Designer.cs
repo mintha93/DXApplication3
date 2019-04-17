@@ -34,22 +34,18 @@
             this.MAVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TENVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SOLUONG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GIABANVND = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GIABANUSD = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TEMGIA = new DevExpress.XtraGrid.Columns.GridColumn();
             this.oFD = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.listBoxTemle = new DevExpress.XtraEditors.ListBoxControl();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
             this.btnImport = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.radioTemle = new DevExpress.XtraEditors.RadioGroup();
             ((System.ComponentModel.ISupportInitialize)(this.gCtrlTemle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvTemle)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxTemle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioTemle.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,19 +63,19 @@
             this.gCtrlTemle.TabIndex = 0;
             this.gCtrlTemle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvTemle});
+            this.gCtrlTemle.Click += new System.EventHandler(this.gCtrlTemle_Click);
             // 
             // grvTemle
             // 
-            this.grvTemle.Appearance.FooterPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grvTemle.Appearance.FooterPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.grvTemle.Appearance.FooterPanel.Options.UseFont = true;
-            this.grvTemle.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grvTemle.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.grvTemle.Appearance.HeaderPanel.Options.UseFont = true;
             this.grvTemle.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.MAVT,
             this.TENVT,
             this.SOLUONG,
-            this.GIABANVND,
-            this.GIABANUSD});
+            this.TEMGIA});
             this.grvTemle.GridControl = this.gCtrlTemle;
             this.grvTemle.Name = "grvTemle";
             this.grvTemle.OptionsView.ColumnAutoWidth = false;
@@ -106,7 +102,7 @@
             this.TENVT.Name = "TENVT";
             this.TENVT.Visible = true;
             this.TENVT.VisibleIndex = 1;
-            this.TENVT.Width = 322;
+            this.TENVT.Width = 370;
             // 
             // SOLUONG
             // 
@@ -120,34 +116,20 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SOLUONG", "{0:0.##}")});
             this.SOLUONG.Visible = true;
             this.SOLUONG.VisibleIndex = 2;
-            this.SOLUONG.Width = 61;
+            this.SOLUONG.Width = 84;
             // 
-            // GIABANVND
+            // TEMGIA
             // 
-            this.GIABANVND.AppearanceHeader.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.GIABANVND.AppearanceHeader.Options.UseFont = true;
-            this.GIABANVND.Caption = "Giá bán VND";
-            this.GIABANVND.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.GIABANVND.FieldName = "GIABAN_VND";
-            this.GIABANVND.Name = "GIABANVND";
-            this.GIABANVND.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "GIABAN_VND", "{0:0.##}")});
-            this.GIABANVND.Visible = true;
-            this.GIABANVND.VisibleIndex = 3;
-            this.GIABANVND.Width = 106;
-            // 
-            // GIABANUSD
-            // 
-            this.GIABANUSD.AppearanceHeader.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.GIABANUSD.AppearanceHeader.Options.UseFont = true;
-            this.GIABANUSD.Caption = "Giá bán USD";
-            this.GIABANUSD.FieldName = "GIABAN_NT";
-            this.GIABANUSD.Name = "GIABANUSD";
-            this.GIABANUSD.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "GIABAN_NT", "{0:0.##}")});
-            this.GIABANUSD.Visible = true;
-            this.GIABANUSD.VisibleIndex = 4;
-            this.GIABANUSD.Width = 81;
+            this.TEMGIA.AppearanceHeader.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.TEMGIA.AppearanceHeader.Options.UseFont = true;
+            this.TEMGIA.Caption = "Tem Giá";
+            this.TEMGIA.FieldName = "TEMGIA";
+            this.TEMGIA.Name = "TEMGIA";
+            this.TEMGIA.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TEMGIA", "{0:0.##}")});
+            this.TEMGIA.Visible = true;
+            this.TEMGIA.VisibleIndex = 3;
+            this.TEMGIA.Width = 117;
             // 
             // oFD
             // 
@@ -169,48 +151,14 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.listBoxTemle);
             this.panel2.Controls.Add(this.btnPreview);
             this.panel2.Controls.Add(this.btnImport);
             this.panel2.Controls.Add(this.labelControl3);
-            this.panel2.Controls.Add(this.labelControl1);
             this.panel2.Controls.Add(this.radioTemle);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(743, 109);
             this.panel2.TabIndex = 2;
-            // 
-            // listBoxTemle
-            // 
-            this.listBoxTemle.Appearance.BackColor = System.Drawing.Color.LightCyan;
-            this.listBoxTemle.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxTemle.Appearance.Options.UseBackColor = true;
-            this.listBoxTemle.Appearance.Options.UseFont = true;
-            this.listBoxTemle.Cursor = System.Windows.Forms.Cursors.Default;
-            this.listBoxTemle.Items.AddRange(new object[] {
-            "CR S27 THUYỀN RỒNG(93)",
-            "CR S28 THÁP CHÀM (94)",
-            "CR T1(88)",
-            "DN I1(28)",
-            "DN I2(29)",
-            "THOMAS SABO TAKASHIMAYA(48)",
-            "TSN D2(07)",
-            "TSN D3(40)",
-            "TSN D4(41)",
-            "TSN D5(42)",
-            "TSN D6(43)",
-            "TSN I1(04)",
-            "TSN I2(06)",
-            "TTP TRÀNG TIỀN(69)",
-            "VIET HOUSE F22(96)"});
-            this.listBoxTemle.Location = new System.Drawing.Point(473, 0);
-            this.listBoxTemle.LookAndFeel.SkinName = "Liquid Sky";
-            this.listBoxTemle.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.listBoxTemle.Name = "listBoxTemle";
-            this.listBoxTemle.Size = new System.Drawing.Size(270, 106);
-            this.listBoxTemle.SortOrder = System.Windows.Forms.SortOrder.Ascending;
-            this.listBoxTemle.TabIndex = 8;
-            this.listBoxTemle.SelectedIndexChanged += new System.EventHandler(this.listBoxTemle_SelectedIndexChanged);
             // 
             // btnPreview
             // 
@@ -246,28 +194,15 @@
             this.labelControl3.LookAndFeel.SkinName = "McSkin";
             this.labelControl3.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(69, 18);
+            this.labelControl3.Size = new System.Drawing.Size(116, 18);
             this.labelControl3.TabIndex = 4;
-            this.labelControl3.Text = "Loại tiền tệ:";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Location = new System.Drawing.Point(418, 21);
-            this.labelControl1.LookAndFeel.SkinName = "McSkin";
-            this.labelControl1.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(49, 13);
-            this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "Kho:";
+            this.labelControl3.Text = "Chọn đơn vị tiền tệ:";
             // 
             // radioTemle
             // 
             this.radioTemle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.radioTemle.EditValue = "abc";
-            this.radioTemle.Location = new System.Drawing.Point(267, 3);
+            this.radioTemle.Location = new System.Drawing.Point(300, 3);
             this.radioTemle.Name = "radioTemle";
             this.radioTemle.Properties.Appearance.BackColor = System.Drawing.SystemColors.MenuBar;
             this.radioTemle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -298,7 +233,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvTemle)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxTemle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioTemle.Properties)).EndInit();
             this.ResumeLayout(false);
 
@@ -312,15 +246,12 @@
         private System.Windows.Forms.Panel panel2;
         private DevExpress.XtraGrid.Columns.GridColumn MAVT;
         private DevExpress.XtraGrid.Columns.GridColumn SOLUONG;
-        private DevExpress.XtraGrid.Columns.GridColumn GIABANVND;
-        private DevExpress.XtraGrid.Columns.GridColumn GIABANUSD;
+        private DevExpress.XtraGrid.Columns.GridColumn TEMGIA;
         private DevExpress.XtraEditors.RadioGroup radioTemle;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.SimpleButton btnPreview;
         private System.Windows.Forms.OpenFileDialog oFD;
         private DevExpress.XtraEditors.SimpleButton btnImport;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraGrid.Columns.GridColumn TENVT;
-        private DevExpress.XtraEditors.ListBoxControl listBoxTemle;
     }
 }

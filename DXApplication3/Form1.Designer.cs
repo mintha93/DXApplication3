@@ -34,6 +34,8 @@
             this.barcodeReport1 = new DXApplication3.BarcodeReport();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnUnlock = new DevExpress.XtraEditors.SimpleButton();
+            this.lblSCT = new DevExpress.XtraEditors.LabelControl();
+            this.lblSochungtu = new DevExpress.XtraEditors.LabelControl();
             this.sidePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             // simpleButton1
             // 
             this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(1, 31);
+            this.simpleButton1.Location = new System.Drawing.Point(12, 31);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(41, 38);
             this.simpleButton1.TabIndex = 2;
@@ -76,17 +78,46 @@
             // btnUnlock
             // 
             this.btnUnlock.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnUnlock.ImageOptions.Image")));
-            this.btnUnlock.Location = new System.Drawing.Point(48, 31);
+            this.btnUnlock.Location = new System.Drawing.Point(69, 31);
             this.btnUnlock.Name = "btnUnlock";
             this.btnUnlock.Size = new System.Drawing.Size(41, 38);
-            this.btnUnlock.TabIndex = 3;
-            this.btnUnlock.Click += new System.EventHandler(this.btnUnlock_Click);
+            this.btnUnlock.TabIndex = 5;
+            this.btnUnlock.Click += new System.EventHandler(this.btnUnlock_Click_1);
+            // 
+            // lblSCT
+            // 
+            this.lblSCT.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSCT.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.lblSCT.Appearance.Options.UseFont = true;
+            this.lblSCT.Appearance.Options.UseForeColor = true;
+            this.lblSCT.Location = new System.Drawing.Point(228, 12);
+            this.lblSCT.LookAndFeel.SkinName = "Money Twins";
+            this.lblSCT.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.lblSCT.Name = "lblSCT";
+            this.lblSCT.Size = new System.Drawing.Size(103, 22);
+            this.lblSCT.TabIndex = 12;
+            this.lblSCT.Text = "Số chứng từ:";
+            // 
+            // lblSochungtu
+            // 
+            this.lblSochungtu.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSochungtu.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.lblSochungtu.Appearance.Options.UseFont = true;
+            this.lblSochungtu.Appearance.Options.UseForeColor = true;
+            this.lblSochungtu.Location = new System.Drawing.Point(373, 12);
+            this.lblSochungtu.LookAndFeel.SkinName = "Money Twins";
+            this.lblSochungtu.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.lblSochungtu.Name = "lblSochungtu";
+            this.lblSochungtu.Size = new System.Drawing.Size(0, 22);
+            this.lblSochungtu.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 427);
+            this.Controls.Add(this.lblSochungtu);
+            this.Controls.Add(this.lblSCT);
             this.Controls.Add(this.btnUnlock);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.sidePanel1);
@@ -99,6 +130,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.sidePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -108,6 +140,8 @@
         private BarcodeReport barcodeReport1;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton btnUnlock;
+        private DevExpress.XtraEditors.LabelControl lblSCT;
+        private DevExpress.XtraEditors.LabelControl lblSochungtu;
     }
 }
 

@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.IO;using System.Text;
 using DevExpress.XtraGrid.Views.Grid;
 using DXApplication3.DTO;
 namespace DXApplication3.DAL
@@ -15,19 +10,35 @@ namespace DXApplication3.DAL
     class clDAL
     {
         SqlConnection _conn = null;
-        //string addressFile;
-        public void InsertLabelNhapxuat( String SCT)
+        public void InsertLabelNhapxuat( String SCT,String userName)
         {
                 _conn = ConnectSql.getConnect();
-                SqlCommand cmd = new SqlCommand("INSERT INTO dbo.LABEL_NHAPXUAT SELECT SCT,1,NGAY,SOLUONG FROM NHAPXUAT WHERE SCT = @SCT", _conn);
+                SqlCommand cmd = new SqlCommand("if (select 1 from dbo.LABEL_NHAPXUAT where SCT = @SCT and DONE=0)=1 "
+                                                    +"begin "
+                                                     +"update dbo.LABEL_NHAPXUAT "
+                                                     +"set INLAI = INLAI + 1,DONE=1,COMPUTERNAME=HOST_NAME(),USERNAME=@USERNAME,GIOIN = GETDATE() "
+                                                     +"where SCT = @SCT "
+                                                    +"end "
+                                                 +"else "
+                                                    +"begin "
+                                                    +"INSERT INTO dbo.LABEL_NHAPXUAT SELECT SCT, 1, NGAY, SOLUONG, HOST_NAME(), @USERNAME, GETDATE(),0 FROM NHAPXUAT WHERE SCT = @SCT "
+                                                    +"end"
+                                                    , _conn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@SCT", SCT);
-                cmd.ExecuteNonQuery();     
+                cmd.Parameters.AddWithValue("@USERNAME", userName);
+            cmd.ExecuteNonQuery();     
         }
         public void Unlockphieu(String SCT)
         {
             _conn = ConnectSql.getConnect();
-            SqlCommand cmd = new SqlCommand("DELETE dbo.LABEL_NHAPXUAT WHERE SCT = @SCT", _conn);
+            SqlCommand cmd = new SqlCommand("if (select 1 from dbo.LABEL_NHAPXUAT where SCT = @SCT and DONE=1)=1 "
+                                                    +"begin "
+                                                        +"update dbo.LABEL_NHAPXUAT "
+                                                        +"set DONE = 0 "
+                                                        +"where SCT = @SCT "
+                                                    +"end"
+                                                    , _conn);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@SCT", SCT);
             cmd.ExecuteNonQuery();
@@ -104,91 +115,58 @@ namespace DXApplication3.DAL
             }
         }
         //-------------------------------------TEMLE-------------------------------------------//
-        public DataTable GetdataTemle(String MAVT, String Makho, Int32 Soluong)
+        public DataTable GetdataTemle(String MAVT, Int32 Soluong, String Temgia)
         {
             _conn = ConnectSql.getConnect();
             SqlCommand cmd = new SqlCommand("GET_VCNB_APP_TEMLE", _conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@MAVT", SqlDbType.NVarChar);
             cmd.Parameters["@MAVT"].Value = MAVT;
-            cmd.Parameters.Add("@MAKHO", SqlDbType.NVarChar);
-            cmd.Parameters["@MAKHO"].Value = Makho;
             cmd.Parameters.Add("@SOLUONG", SqlDbType.Int);
             cmd.Parameters["@SOLUONG"].Value = Soluong;
+            cmd.Parameters.AddWithValue("@TEMGIA", Temgia);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
             return dt;
+        }
+        public String getMaxKhoaTemLe()
+        {
+            _conn = ConnectSql.getConnect();
+            SqlCommand Command = new SqlCommand();
+            Command = _conn.CreateCommand();
+            Command.CommandText = @"SELECT 'TEMLE' + RIGHT('0000000' + CONVERT(VARCHAR(7), MAX(CONVERT(INT,SUBSTRING(KHOA,6,LEN(KHOA)-5)))+1), 7)  FROM dbo.LABEL_TEMLE";
+            String khoa = (String)Command.ExecuteScalar();
+            return khoa;
+        }
 
-        }
-        public Double getCurval_Temle()
-        {
-            _conn = ConnectSql.getConnect();
-            SqlCommand Command = new SqlCommand();
-            Command = _conn.CreateCommand();
-            Command.CommandText = @"SELECT SEQ_CURVAL FROM SYS_SEQUENCE WHERE SEQ_NAME = 'LABEL_TEMLE'";
-            Double Curval = (Double)Command.ExecuteScalar();
-            return Curval;
-        }
-        public Double getCurval_Temle_Detail()
-        {
-            _conn = ConnectSql.getConnect();
-            SqlCommand Command = new SqlCommand();
-            Command = _conn.CreateCommand();
-            Command.CommandText = @"SELECT SEQ_CURVAL FROM SYS_SEQUENCE WHERE SEQ_NAME = 'LABEL_TEMLE_DETAIL'";
-            Double Curval = (Double)Command.ExecuteScalar();
-            return Curval;
-        }
-        public void Insertlabel_temle(Double KHOA,String Kho,DateTime Ngay)
+        public void Insertlabel_temle(String KHOA,String userName)
         {
             _conn = ConnectSql.getConnect();
             SqlCommand cmd = new SqlCommand("INSERT INTO dbo.LABEL_TEMLE " +
-                "VALUES (@KHOA,@KHO,@NGAY)", _conn);
+                "VALUES (@KHOA,HOST_NAME(),@USERNAME,GETDATE())", _conn);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@KHOA", KHOA);
-            cmd.Parameters.AddWithValue("@KHO", Kho);
-            cmd.Parameters.AddWithValue("@NGAY", Ngay);
+            cmd.Parameters.AddWithValue("@USERNAME", userName);
             cmd.ExecuteNonQuery();
         }
-        public void InsertLabel_temle_detail(Double KHOA_CT, String MAVT, Int32 SOLUONG, String GIABANVND, String GIABANUSD, Double KHOA_TEMLE)
+        public void InsertLabel_temle_detail(String KHOA, String MAVT, Int32 SOLUONG, Double Temgia, String Currency)
         {
             _conn = ConnectSql.getConnect();
-            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.LABEL_TEMLE_DETAIL (KHOA_CT,MAVT,SOLUONG,GIABANVND,GIABANUSD,KHOA_TEMLE)"+
-                                            "VALUES  (@KHOA_CT,@MAVT,@SOLUONG,@GIABANVND,@GIABANUSD,@KHOA_TEMLE)", _conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.LABEL_TEMLE_DETAIL "+
+                                            "VALUES  (@KHOA,@MAVT,@SOLUONG,@TEMGIA,@CURRENCY)", _conn);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@KHOA_CT", KHOA_CT);
+            cmd.Parameters.AddWithValue("@KHOA", KHOA);
             cmd.Parameters.AddWithValue("@MAVT", MAVT);
             cmd.Parameters.AddWithValue("@SOLUONG", SOLUONG);
-            cmd.Parameters.AddWithValue("@GIABANVND", GIABANVND);
-            cmd.Parameters.AddWithValue("@GIABANUSD", GIABANUSD);
-            cmd.Parameters.AddWithValue("@KHOA_TEMLE", KHOA_TEMLE);
+            cmd.Parameters.AddWithValue("@TEMGIA", Temgia);
+            cmd.Parameters.AddWithValue("@CURRENCY", Currency);
             cmd.ExecuteNonQuery();
-        }
-        public void updateSys_sequence_temle_detail(String Curval_detail)
-        {
-            _conn = ConnectSql.getConnect();
-            SqlCommand Command = new SqlCommand();
-            Command = _conn.CreateCommand();
-            Command.CommandText = @"UPDATE SYS_SEQUENCE SET SEQ_CURVAL = '" + Curval_detail + "' WHERE SEQ_NAME = 'LABEL_TEMLE_DETAIL'";
-
-            Command.ExecuteNonQuery();
-        }
-        public void updateSys_sequence_temle()
-        {
-            _conn = ConnectSql.getConnect();
-            SqlCommand Command = new SqlCommand();
-            Command = _conn.CreateCommand();
-            Command.CommandText = @"UPDATE SYS_SEQUENCE SET SEQ_CURVAL = SEQ_CURVAL + 1 WHERE SEQ_NAME = 'LABEL_TEMLE'";
-
-            Command.ExecuteNonQuery();
         }
         public void deleteTemle(String KHOA)
         {
             _conn = ConnectSql.getConnect();
-            SqlCommand cmd = new SqlCommand("DELETE dbo.LABEL_TEMLE WHERE KHOA = @KHOA" +
-                "  UPDATE SYS_SEQUENCE SET SEQ_CURVAL = @KHOA -1  WHERE SEQ_NAME = 'LABEL_TEMLE'" +
-                "  UPDATE SYS_SEQUENCE SET SEQ_CURVAL = (SELECT MAX(KHOA_CT) FROM LABEL_TEMLE_DETAIL WHERE KHOA_TEMLE = @KHOA -1)" +
-                "  WHERE SEQ_NAME = 'LABEL_TEMLE_DETAIL'", _conn);
+            SqlCommand cmd = new SqlCommand("DELETE dbo.LABEL_TEMLE WHERE KHOA = @KHOA" , _conn);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@KHOA", KHOA);
             cmd.ExecuteNonQuery();
@@ -213,12 +191,38 @@ namespace DXApplication3.DAL
             return totalUSD.ToString();
 
         }
+        public String getMultipleTotalTemle(GridView gridView)
+        {
+            Double totalUSD = 0;
+            for (int i = 0; i < gridView.DataRowCount; i++)
+            {
+                totalUSD = totalUSD + Convert.ToDouble(gridView.GetRowCellValue(i, "SOLUONG")) * (Convert.ToDouble(TestNull(gridView.GetRowCellValue(i, "TEMGIA").ToString())));
+            }
+            return totalUSD.ToString();
+
+        }
         public  String TestNull(string s)
         {
             if (String.IsNullOrEmpty(s))
                 return "0";
             else
                 return s;
+        }
+        public string getPath(int value)
+        {
+            List<string> strList = new List<string>();
+            FileStream fs = new FileStream("D:\\Intem\\Report\\Path.txt", FileMode.Open);
+            StreamReader rd = new StreamReader(fs, Encoding.UTF8);
+            String line1 = rd.ReadLine();
+            String line2 = rd.ReadLine();
+            String line3 = rd.ReadLine();
+            String line4 = rd.ReadLine();
+            strList.Add(line1.Substring(7, line1.Length - 7));
+            strList.Add(line2.Substring(17, line2.Length - 17));
+            strList.Add(line3.Substring(12, line3.Length - 12));
+            strList.Add(line4.Substring(10, line4.Length - 10));
+            rd.Close();
+            return strList[value];
         }
 
     }

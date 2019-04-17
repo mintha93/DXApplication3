@@ -34,41 +34,29 @@ namespace DXApplication3.BUS
         {
             return _DAL.CreateMD5(input);
         }
-        public void InsertLabelNhapxuat(String SCT)
+        public void InsertLabelNhapxuat(String SCT,String userName)
         {
-            _DAL.InsertLabelNhapxuat(SCT);
+            _DAL.InsertLabelNhapxuat(SCT,userName);
         }
         public void Unlockphieu(String SCT)
         {
             _DAL.Unlockphieu(SCT);
         }
-        public DataTable GetdataTemle(String MAVT, String Makho, Int32 Soluong)
+        public DataTable GetdataTemle(String MAVT, Int32 Soluong, String Temgia)
         {
-            return _DAL.GetdataTemle(MAVT, Makho, Soluong);
+            return _DAL.GetdataTemle(MAVT, Soluong, Temgia);
         }
-        public Double getCurval_Temle()
+        public String getMaxKhoaTemLe()
         {
-            return _DAL.getCurval_Temle();
+            return _DAL.getMaxKhoaTemLe();
         }
-        public Double getCurval_Temle_Detail()
+        public void Insertlabel_temle(String KHOA, String userName)
         {
-            return _DAL.getCurval_Temle_Detail();
+            _DAL.Insertlabel_temle(KHOA, userName);
         }
-        public void Insertlabel_temle(Double KHOA, String Kho, DateTime Ngay)
+        public void InsertLabel_temle_detail(String KHOA, String MAVT, Int32 SOLUONG, Double Temgia, String Currency)
         {
-            _DAL.Insertlabel_temle(KHOA, Kho, Ngay);
-        }
-        public void InsertLabel_temle_detail(Double KHOA_CT, String MAVT, Int32 SOLUONG, String GIABANVND, String GIABANUSD, Double KHOA_TEMLE)
-        {
-            _DAL.InsertLabel_temle_detail(KHOA_CT, MAVT, SOLUONG, GIABANVND, GIABANUSD, KHOA_TEMLE);
-        }
-        public void updateSys_sequence_temle_detail(String Curval_detail)
-        {
-            _DAL.updateSys_sequence_temle_detail(Curval_detail);
-        }
-        public void updateSys_sequence_temle()
-        {
-            _DAL.updateSys_sequence_temle();
+            _DAL.InsertLabel_temle_detail(KHOA, MAVT, SOLUONG, Temgia, Currency);
         }
         public void deleteTemle(String KHOA)
         {
@@ -82,9 +70,39 @@ namespace DXApplication3.BUS
         {
             return _DAL.getMultipleTotalUSD(gridView);
         }
+        public String getMultipleTotalTemle(GridView gridView)
+        {
+            return _DAL.getMultipleTotalTemle(gridView);
+        }
         public String TestNull(string s)
         {
             return _DAL.TestNull(s);
-        } 
         }
+        public string getPath(int value)
+        {
+            return _DAL.getPath(value);
+        }
+        public int getPriorityFromFileText(String userName,String passWord)
+        {
+            String line3 = _DAL.getPath(2);
+            String line4 = _DAL.getPath(3);
+            if (line3.Substring(0, line3.IndexOf('/') ).Trim() == userName && line3.Substring(line3.IndexOf('/') + 1, line3.Length - line3.IndexOf('/') -1 ).Trim() == passWord)
+                return 1;
+            else if (line4.Substring(0, line4.IndexOf('/')).Trim() == userName && line4.Substring(line4.IndexOf('/') + 1, line4.Length - line4.IndexOf('/') -1).Trim() == passWord)
+                return 2;
+            else
+                return 3;
+        }
+        public String getuserNameFromFileText(int temp)
+        {
+            String line3 = _DAL.getPath(2);
+            String line4 = _DAL.getPath(3);
+            if (temp==1)
+                return line3.Substring(0, line3.IndexOf('/'));
+            else if (temp == 2)
+                return line3.Substring(line3.IndexOf('/') + 1 , line3.Length - line3.IndexOf('/')-1);
+            else
+                return "";
+        }
+    }
 }

@@ -19,9 +19,10 @@ namespace DXApplication3
     {
 
         clBUS _BUS = new clBUS();
+        string userNameFrm3 = "";
+        int priorityFrm3;
         string addressFile;
         int SoReport_Frm3 = 2;
-
         public Form3()
         {
             InitializeComponent();
@@ -29,6 +30,8 @@ namespace DXApplication3
 
         private void Form3_Load(object sender, EventArgs e)
         {
+           //String KHOA = _BUS.getMaxKhoaTemLe();
+         // MessageBox.Show(radioTemle.EditValue.ToString());
             grvTemle.AddNewRow();
         }
 
@@ -36,12 +39,6 @@ namespace DXApplication3
         {
             try
             {
-                if (listBoxTemle.SelectedIndex == -1)
-                {
-                    MessageBox.Show("Bạn chưa chọn shop");
-                }
-                else
-                {
                     oFD.Filter = "Tất Cả Các File |*.*|Excel 2003 Files |*.xls|Excel 2007 File|*.xlsx";
                     oFD.FileName = "";
                     oFD.ShowDialog();
@@ -50,26 +47,24 @@ namespace DXApplication3
                     OleDbDataAdapter adapter = new OleDbDataAdapter(query, connec);
                     DataTable tblImport = new DataTable();
                     adapter.Fill(tblImport);
-                    if (tblImport.Rows.Count > 0)
-                    {
-                        String tenkho = listBoxTemle.SelectedValue.ToString();
-                        String makho = tenkho.Substring(tenkho.Length - 3, 2);
-                        gCtrlTemle.DataSource = tblImport;
+                if (tblImport.Rows.Count > 0)
+                {
+                    gCtrlTemle.DataSource = tblImport;
                         DataTable dtall = new DataTable();
                         DataTable dttemp = new DataTable();
-                        for (int i = 0; i < grvTemle.DataRowCount; i++)
-                        {
-                            dttemp = _BUS.GetdataTemle(grvTemle.GetRowCellValue(i, "MAVT").ToString(), makho, Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")));
-                            dtall.Merge(dttemp);
-                        }
-                        gCtrlTemle.DataSource = dtall;
-                       GIABANVND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvTemle);
-                       GIABANUSD.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvTemle);
+                    DataTable dttemp1 = new DataTable();
+                    dtall = _BUS.GetdataTemle(grvTemle.GetRowCellValue(0, "MAVT").ToString(), Convert.ToInt32(grvTemle.GetRowCellValue(0, "SOLUONG")), grvTemle.GetRowCellValue(0, "TEMGIA").ToString());
+                    for (int i = 1; i < grvTemle.DataRowCount; i++)
+                {
+                        dttemp = _BUS.GetdataTemle(grvTemle.GetRowCellValue(i, "MAVT").ToString(), Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), grvTemle.GetRowCellValue(i, "TEMGIA").ToString());
+                        dtall= dtall.AsEnumerable().Union(dttemp.AsEnumerable()).CopyToDataTable<DataRow>();;
                     }
-                    else
+                gCtrlTemle.DataSource = dtall;
+                       TEMGIA.SummaryItem.DisplayFormat = _BUS.getMultipleTotalTemle(grvTemle);
+                }
+                else
                     {
-                        gCtrlTemle.DataSource = null;
-                    }
+                    gCtrlTemle.DataSource = null;
                 }
             }
             catch
@@ -120,18 +115,16 @@ namespace DXApplication3
                 }
                 else
                 {
-                    Double Curval_detail = _BUS.getCurval_Temle_Detail();
-                    _BUS.Insertlabel_temle(_BUS.getCurval_Temle() + 1.0, listBoxTemle.SelectedValue.ToString(), DateTime.Now);
+                    String KHOA = _BUS.getMaxKhoaTemLe();
+                    String Currency= radioTemle.Properties.Items[radioTemle.SelectedIndex].Description;
+                    _BUS.Insertlabel_temle(KHOA, userNameFrm3);
                     for (int i = 0; i < grvTemle.DataRowCount; i++)
                     {
-                        _BUS.InsertLabel_temle_detail(Curval_detail + 1.0 + i, grvTemle.GetRowCellDisplayText(i, "MAVT"),
-                            Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), grvTemle.GetRowCellValue(i, "GIABAN_VND").ToString()
-                            , grvTemle.GetRowCellValue(i, "GIABAN_NT").ToString(), _BUS.getCurval_Temle() + 1.0);
+                        _BUS.InsertLabel_temle_detail(KHOA, grvTemle.GetRowCellDisplayText(i, "MAVT"),
+                            Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), Convert.ToDouble(grvTemle.GetRowCellValue(i, "TEMGIA")), Currency);
                     }
-                    _BUS.updateSys_sequence_temle();
-                    _BUS.updateSys_sequence_temle_detail((grvTemle.DataRowCount + Convert.ToInt32(Curval_detail)).ToString());
                     Form1 form1 = new Form1();
-                    form1.PassvaluefromForm2(radioTemle.SelectedIndex.ToString(), Convert.ToInt32(_BUS.getCurval_Temle()), SoReport_Frm3);
+                    form1.PassvaluefromForm3(KHOA, Currency, 2, userNameFrm3, priorityFrm3);
                     form1.Show();
                     this.Hide();
 
@@ -144,29 +137,20 @@ namespace DXApplication3
 
         }
 
-        private void listBoxTemle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            String tenkho = listBoxTemle.SelectedValue.ToString();
-            String makho = tenkho.Substring(tenkho.Length - 3, 2);
-            DataTable dtall = new DataTable();
-            DataTable dttemp = new DataTable();
-            for (int i = 0; i < grvTemle.DataRowCount; i++)
-            {
-                dttemp = _BUS.GetdataTemle(grvTemle.GetRowCellValue(i, "MAVT").ToString(), makho, Convert.ToInt16(grvTemle.GetRowCellValue(i, "SOLUONG")));
-                dtall.Merge(dttemp);
-
-            }
-            gCtrlTemle.DataSource = dtall;
-            GIABANVND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvTemle);
-            GIABANUSD.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvTemle);
-        }
         private void Form3_Closing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
             e.Cancel = true;
-            Form2 frm2 = new Form2();
-            frm2.Show();
+        }
+        public void PassvaluefromForm2(string userName, int priority)
+        {
+            userNameFrm3 = userName;
+            priorityFrm3 = priority;
         }
 
+        private void gCtrlTemle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

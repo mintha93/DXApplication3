@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DXApplication3.DTO
 {
@@ -20,7 +21,8 @@ namespace DXApplication3.DTO
                 {
                     //con = new SqlConnection("Data Source = DESKTOP-B9QFJSF; Initial Catalog = DUYANH; Integrated Security = True");
                     //con = new SqlConnection("Data Source=113.161.91.59,1433;Network Library=DBMSSOCN;Initial Catalog=DUYANH;User ID=sa;Password=SQL@123@");
-                    con = new SqlConnection("Data Source=192.168.68.252;Network Library=DBMSSOCN;Initial Catalog=DUYANH;User ID=sa;Password=SQL@123@");
+                    //con = new SqlConnection("Data Source=192.168.68.252;Network Library=DBMSSOCN;Initial Catalog=DUYANH;User ID=sa;Password=SQL@123@");
+                    con = new SqlConnection(getPath(1));
 
                     con.Open();
                 }
@@ -36,6 +38,18 @@ namespace DXApplication3.DTO
             return null;
         }
 
+        public static string  getPath(int value)
+        {
+            List<string> strList = new List<string>();
+            FileStream fs = new FileStream("D:\\Intem\\Report\\Path.txt", FileMode.Open);
+            StreamReader rd = new StreamReader(fs, Encoding.UTF8);
+            String line1 = rd.ReadLine();// ReadLine() chỉ đọc 1 dòng đầu thoy, ReadToEnd là đọc hết
+            String line2 = rd.ReadLine();
+            strList.Add(line1.Substring(7, line1.Length - 7));
+            strList.Add(line2.Substring(17, line2.Length - 17));
+            rd.Close();
+            return strList[value];
+        }
         public static void closeConnect()
         {
             if (con != null)
