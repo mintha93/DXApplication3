@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.sidePanel1 = new DevExpress.XtraEditors.SidePanel();
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.barcodeReport1 = new DXApplication3.BarcodeReport();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnUnlock = new DevExpress.XtraEditors.SimpleButton();
             this.lblSCT = new DevExpress.XtraEditors.LabelControl();
@@ -125,7 +124,7 @@
             this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Form In Tem";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1Closing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.sidePanel1.ResumeLayout(false);
@@ -137,7 +136,6 @@
         #endregion
         private DevExpress.XtraEditors.SidePanel sidePanel1;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-        private BarcodeReport barcodeReport1;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton btnUnlock;
         private DevExpress.XtraEditors.LabelControl lblSCT;

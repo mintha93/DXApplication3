@@ -8,8 +8,8 @@
     <ProjectGuid>{6F2B8747-FA9D-491F-959A-0D20ABB29705}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DXApplication3</RootNamespace>
-    <AssemblyName>DXApplication3</AssemblyName>
+    <RootNamespace>BarcodeLabel</RootNamespace>
+    <AssemblyName>BarcodeLabel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -33,11 +33,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -106,22 +107,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BarcodeReport - Temle.cs">
+    <Compile Include="BarcodeReport_D6.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BarcodeReport - Temle.rpt</DependentUpon>
+      <DependentUpon>BarcodeReport_D6.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BarcodeReport.cs">
+    <Compile Include="BarcodeReport_D6_Temle.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BarcodeReport.rpt</DependentUpon>
+      <DependentUpon>BarcodeReport_D6_Temle.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BarcodeReportD6.cs">
+    <Compile Include="BarcodeReport_Temle_USD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BarcodeReportD6.rpt</DependentUpon>
+      <DependentUpon>BarcodeReport_Temle_USD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BarcodeReport_USD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarcodeReport_USD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BarcodeReport_VND.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarcodeReport_VND.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="BUS\clBUS.cs" />
@@ -139,6 +152,12 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormD6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormD6.Designer.cs">
+      <DependentUpon>FormD6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LoginForm.cs">
@@ -153,23 +172,34 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BarcodeReport - Temle.rpt">
+    <EmbeddedResource Include="BarcodeReport_D6.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BarcodeReport - Temle.cs</LastGenOutput>
+      <LastGenOutput>BarcodeReport_D6.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="BarcodeReport.rpt">
+    <EmbeddedResource Include="BarcodeReport_D6_Temle.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BarcodeReport.cs</LastGenOutput>
+      <LastGenOutput>BarcodeReport_D6_Temle.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="BarcodeReportD6.rpt">
+    <EmbeddedResource Include="BarcodeReport_Temle_USD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BarcodeReportD6.cs</LastGenOutput>
+      <LastGenOutput>BarcodeReport_Temle_USD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BarcodeReport_USD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BarcodeReport_USD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BarcodeReport_VND.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BarcodeReport_VND.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormD6.resx">
+      <DependentUpon>FormD6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -225,6 +255,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MsgBox\MsgBox.csproj">
+      <Project>{2466C7AD-0379-4517-99FF-A1E61C290065}</Project>
+      <Name>MsgBox</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

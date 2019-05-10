@@ -65,7 +65,6 @@
             this.teUsername.TabIndex = 1;
             this.teUsername.EditValueChanged += new System.EventHandler(this.teUsername_EditValueChanged);
             this.teUsername.Click += new System.EventHandler(this.teUsername_Click);
-            this.teUsername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.teUsername_KeyPress);
             this.teUsername.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.teUsername_PreviewKeyDown);
             // 
             // tePassword

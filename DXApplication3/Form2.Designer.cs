@@ -52,8 +52,7 @@
             this.TENVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SO_LUONG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GIABAN_VND = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GIABAN_NT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GIABAN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -69,6 +68,7 @@
             this.teKhoxuat = new DevExpress.XtraEditors.TextEdit();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barbtnIntemle = new DevExpress.XtraBars.BarButtonItem();
+            this.barbtnIntemD6 = new DevExpress.XtraBars.BarButtonItem();
             this.barbtnThoat = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
@@ -83,6 +83,7 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.lblWelcome = new DevExpress.XtraEditors.LabelControl();
+            this.CURRENCY = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
@@ -322,8 +323,8 @@
             this.TENVT,
             this.DVT,
             this.SO_LUONG,
-            this.GIABAN_VND,
-            this.GIABAN_NT});
+            this.GIABAN,
+            this.CURRENCY});
             this.grvDetail.GridControl = this.gctrlDetail;
             this.grvDetail.Name = "grvDetail";
             this.grvDetail.OptionsBehavior.Editable = false;
@@ -378,29 +379,17 @@
             this.SO_LUONG.VisibleIndex = 4;
             this.SO_LUONG.Width = 61;
             // 
-            // GIABAN_VND
+            // GIABAN
             // 
-            this.GIABAN_VND.Caption = "Giá bán VND";
-            this.GIABAN_VND.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.GIABAN_VND.FieldName = "GIABAN_VND";
-            this.GIABAN_VND.Name = "GIABAN_VND";
-            this.GIABAN_VND.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            this.GIABAN.Caption = "Giá bán";
+            this.GIABAN.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.GIABAN.FieldName = "GIABAN";
+            this.GIABAN.Name = "GIABAN";
+            this.GIABAN.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "GIABAN_VND", "ABC")});
-            this.GIABAN_VND.Visible = true;
-            this.GIABAN_VND.VisibleIndex = 5;
-            this.GIABAN_VND.Width = 118;
-            // 
-            // GIABAN_NT
-            // 
-            this.GIABAN_NT.Caption = "Giá bán USD";
-            this.GIABAN_NT.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.GIABAN_NT.FieldName = "GIABAN_NT";
-            this.GIABAN_NT.Name = "GIABAN_NT";
-            this.GIABAN_NT.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "GIABAN_NT", "{0:0.##}")});
-            this.GIABAN_NT.Visible = true;
-            this.GIABAN_NT.VisibleIndex = 6;
-            this.GIABAN_NT.Width = 152;
+            this.GIABAN.Visible = true;
+            this.GIABAN.VisibleIndex = 5;
+            this.GIABAN.Width = 118;
             // 
             // btnPreview
             // 
@@ -422,7 +411,7 @@
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(178, 61);
+            this.labelControl1.Location = new System.Drawing.Point(170, 61);
             this.labelControl1.LookAndFeel.SkinName = "Money Twins";
             this.labelControl1.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl1.Name = "labelControl1";
@@ -436,7 +425,7 @@
             this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(178, 82);
+            this.labelControl2.Location = new System.Drawing.Point(170, 82);
             this.labelControl2.LookAndFeel.SkinName = "Money Twins";
             this.labelControl2.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl2.Name = "labelControl2";
@@ -447,7 +436,7 @@
             // dEdateto
             // 
             this.dEdateto.EditValue = new System.DateTime(2019, 3, 1, 14, 52, 42, 189);
-            this.dEdateto.Location = new System.Drawing.Point(263, 80);
+            this.dEdateto.Location = new System.Drawing.Point(255, 80);
             this.dEdateto.Name = "dEdateto";
             this.dEdateto.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.dEdateto.Properties.Appearance.Options.UseForeColor = true;
@@ -462,7 +451,7 @@
             // dEdatefrom
             // 
             this.dEdatefrom.EditValue = new System.DateTime(2019, 2, 19, 14, 52, 42, 173);
-            this.dEdatefrom.Location = new System.Drawing.Point(263, 59);
+            this.dEdatefrom.Location = new System.Drawing.Point(255, 59);
             this.dEdatefrom.Name = "dEdatefrom";
             this.dEdatefrom.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.dEdatefrom.Properties.Appearance.Options.UseForeColor = true;
@@ -476,7 +465,7 @@
             // 
             // teSCT
             // 
-            this.teSCT.Location = new System.Drawing.Point(590, 58);
+            this.teSCT.Location = new System.Drawing.Point(619, 58);
             this.teSCT.Name = "teSCT";
             this.teSCT.Size = new System.Drawing.Size(296, 20);
             this.teSCT.TabIndex = 12;
@@ -487,7 +476,7 @@
             this.labelControl6.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
-            this.labelControl6.Location = new System.Drawing.Point(500, 61);
+            this.labelControl6.Location = new System.Drawing.Point(529, 61);
             this.labelControl6.LookAndFeel.SkinName = "Money Twins";
             this.labelControl6.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl6.Name = "labelControl6";
@@ -497,7 +486,7 @@
             // 
             // teSearchSCT
             // 
-            this.teSearchSCT.Location = new System.Drawing.Point(263, 104);
+            this.teSearchSCT.Location = new System.Drawing.Point(255, 104);
             this.teSearchSCT.Name = "teSearchSCT";
             this.teSearchSCT.Size = new System.Drawing.Size(178, 20);
             this.teSearchSCT.TabIndex = 10;
@@ -509,7 +498,7 @@
             this.labelControl5.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Appearance.Options.UseForeColor = true;
-            this.labelControl5.Location = new System.Drawing.Point(177, 107);
+            this.labelControl5.Location = new System.Drawing.Point(169, 107);
             this.labelControl5.LookAndFeel.SkinName = "Money Twins";
             this.labelControl5.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl5.Name = "labelControl5";
@@ -523,7 +512,7 @@
             this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
-            this.labelControl4.Location = new System.Drawing.Point(500, 106);
+            this.labelControl4.Location = new System.Drawing.Point(529, 106);
             this.labelControl4.LookAndFeel.SkinName = "Money Twins";
             this.labelControl4.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl4.Name = "labelControl4";
@@ -537,7 +526,7 @@
             this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.Location = new System.Drawing.Point(500, 85);
+            this.labelControl3.Location = new System.Drawing.Point(529, 85);
             this.labelControl3.LookAndFeel.SkinName = "Money Twins";
             this.labelControl3.LookAndFeel.UseDefaultLookAndFeel = false;
             this.labelControl3.Name = "labelControl3";
@@ -547,14 +536,14 @@
             // 
             // teKhonhap
             // 
-            this.teKhonhap.Location = new System.Drawing.Point(590, 104);
+            this.teKhonhap.Location = new System.Drawing.Point(619, 104);
             this.teKhonhap.Name = "teKhonhap";
             this.teKhonhap.Size = new System.Drawing.Size(296, 20);
             this.teKhonhap.TabIndex = 6;
             // 
             // teKhoxuat
             // 
-            this.teKhoxuat.Location = new System.Drawing.Point(590, 82);
+            this.teKhoxuat.Location = new System.Drawing.Point(619, 82);
             this.teKhoxuat.Name = "teKhoxuat";
             this.teKhoxuat.Size = new System.Drawing.Size(296, 20);
             this.teKhoxuat.TabIndex = 5;
@@ -562,6 +551,7 @@
             // popupMenu1
             // 
             this.popupMenu1.ItemLinks.Add(this.barbtnIntemle);
+            this.popupMenu1.ItemLinks.Add(this.barbtnIntemD6);
             this.popupMenu1.ItemLinks.Add(this.barbtnThoat);
             this.popupMenu1.Name = "popupMenu1";
             this.popupMenu1.Ribbon = this.ribbonControl1;
@@ -573,10 +563,17 @@
             this.barbtnIntemle.Name = "barbtnIntemle";
             this.barbtnIntemle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnIntemle);
             // 
+            // barbtnIntemD6
+            // 
+            this.barbtnIntemD6.Caption = "In tem cỡ nhỏ";
+            this.barbtnIntemD6.Id = 1;
+            this.barbtnIntemD6.Name = "barbtnIntemD6";
+            this.barbtnIntemD6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnIntemD6);
+            // 
             // barbtnThoat
             // 
             this.barbtnThoat.Caption = "Thoát";
-            this.barbtnThoat.Id = 1;
+            this.barbtnThoat.Id = 2;
             this.barbtnThoat.Name = "barbtnThoat";
             this.barbtnThoat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barbtnThoat_ItemClick);
             // 
@@ -589,7 +586,7 @@
             this.barButtonItem1,
             this.barStaticItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 8;
+            this.ribbonControl1.MaxItemId = 10;
             this.ribbonControl1.MiniToolbars.Add(this.ribbonMiniToolbar1);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -632,6 +629,7 @@
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barbtnIntemle,
+            this.barbtnIntemD6,
             this.barbtnThoat});
             this.barManager1.MaxItemId = 2;
             // 
@@ -685,6 +683,14 @@
             this.lblWelcome.Size = new System.Drawing.Size(101, 18);
             this.lblWelcome.TabIndex = 18;
             this.lblWelcome.Text = "-------------------------";
+            // 
+            // CURRENCY
+            // 
+            this.CURRENCY.Caption = "Đơn vị tiền tệ";
+            this.CURRENCY.FieldName = "CURRENCY";
+            this.CURRENCY.Name = "CURRENCY";
+            this.CURRENCY.Visible = true;
+            this.CURRENCY.VisibleIndex = 6;
             // 
             // Form2
             // 
@@ -780,8 +786,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn TENVT;
         private DevExpress.XtraGrid.Columns.GridColumn DVT;
         private DevExpress.XtraGrid.Columns.GridColumn SO_LUONG;
-        private DevExpress.XtraGrid.Columns.GridColumn GIABAN_VND;
-        private DevExpress.XtraGrid.Columns.GridColumn GIABAN_NT;
+        private DevExpress.XtraGrid.Columns.GridColumn GIABAN;
         private DevExpress.XtraBars.PopupMenu popupMenu1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -789,6 +794,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.BarButtonItem barbtnIntemle;
+        private DevExpress.XtraBars.BarButtonItem barbtnIntemD6; 
         private DevExpress.XtraBars.BarButtonItem barbtnThoat;
         private DevExpress.XtraEditors.DateEdit dEdatefrom;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
@@ -800,5 +806,6 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.BarEditItem barEditItem1;
         private DevExpress.XtraEditors.LabelControl lblWelcome;
+        private DevExpress.XtraGrid.Columns.GridColumn CURRENCY;
     }
 }

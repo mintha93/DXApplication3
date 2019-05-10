@@ -62,13 +62,9 @@ namespace DXApplication3.BUS
         {
             _DAL.deleteTemle(KHOA);
         }
-            public String getMultipleTotalVND(GridView gridView)
+            public String getMultipleTotal(GridView gridView)
         {
-            return _DAL.getMultipleTotalVND(gridView);
-        }
-        public String getMultipleTotalUSD(GridView gridView)
-        {
-            return _DAL.getMultipleTotalUSD(gridView);
+            return _DAL.getMultipleTotal(gridView);
         }
         public String getMultipleTotalTemle(GridView gridView)
         {
@@ -104,5 +100,10 @@ namespace DXApplication3.BUS
             else
                 return "";
         }
-    }
+
+        public DataTable GetDataD6(String SCT)
+        {
+            return _DAL.GetDataD6(SCT);
+        }
+        }
 }

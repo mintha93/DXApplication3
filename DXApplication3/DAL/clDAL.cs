@@ -43,7 +43,6 @@ namespace DXApplication3.DAL
             cmd.Parameters.AddWithValue("@SCT", SCT);
             cmd.ExecuteNonQuery();
         }
-
         public DataTable getVCNB(String Date1, String Date2)
         {
             _conn = ConnectSql.getConnect();
@@ -124,7 +123,8 @@ namespace DXApplication3.DAL
             cmd.Parameters["@MAVT"].Value = MAVT;
             cmd.Parameters.Add("@SOLUONG", SqlDbType.Int);
             cmd.Parameters["@SOLUONG"].Value = Soluong;
-            cmd.Parameters.AddWithValue("@TEMGIA", Temgia);
+            cmd.Parameters.Add("@TEMGIA", SqlDbType.Float);
+            cmd.Parameters["@TEMGIA"].Value = Temgia;
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -171,24 +171,14 @@ namespace DXApplication3.DAL
             cmd.Parameters.AddWithValue("@KHOA", KHOA);
             cmd.ExecuteNonQuery();
         }
-        public String getMultipleTotalVND(GridView gridView)
+        public String getMultipleTotal(GridView gridView)
         {
             Double totalVND = 0;
             for (int i = 0; i < gridView.DataRowCount; i++)
             {
-                totalVND = totalVND + Convert.ToDouble(gridView.GetRowCellValue(i, "SOLUONG")) * Convert.ToDouble(TestNull(gridView.GetRowCellValue(i, "GIABAN_VND").ToString()));
+                totalVND = totalVND + Convert.ToDouble(gridView.GetRowCellValue(i, "SOLUONG")) * Convert.ToDouble(TestNull(gridView.GetRowCellValue(i, "GIABAN").ToString()));
             }
             return totalVND.ToString();
-
-        }
-        public String getMultipleTotalUSD(GridView gridView)
-        {
-            Double totalUSD = 0;
-            for (int i = 0; i < gridView.DataRowCount; i++)
-            {
-                totalUSD = totalUSD + Convert.ToDouble(gridView.GetRowCellValue(i, "SOLUONG")) * (Convert.ToDouble(TestNull(gridView.GetRowCellValue(i, "GIABAN_NT").ToString())));
-            }
-            return totalUSD.ToString();
 
         }
         public String getMultipleTotalTemle(GridView gridView)
@@ -224,6 +214,25 @@ namespace DXApplication3.DAL
             rd.Close();
             return strList[value];
         }
+        //---------------------------------------------------------TEM D6-----------------------------------------------------------------------//
 
+        public DataTable GetDataD6(String SCT)
+        {
+            _conn = ConnectSql.getConnect();
+            SqlCommand cmd = new SqlCommand("SELECT B.MAVT, D.TENVT, B.SOLUONG, B.GIABAN2 AS TEMGIA,A.DGIAI AS DIENGIAI"
+                                                + " FROM NHAPXUAT A"
+                                                     +" JOIN dbo.NHAPXUAT_CT B ON B.KHOA = A.KHOA AND B.LOC = A.LOC"
+                                                     +" JOIN dbo.DM_HH_CT C ON C.MABH = B.MAVT"
+                                                     +" JOIN dbo.DM_HH D ON D.MAVT = C.MAVT"
+                                                +" WHERE A.LCT = 'CKHO' AND A.MAKHO2 = 43 AND A.SCT = @SCT"
+                                                +" ORDER BY B.MAVT ", _conn);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@SCT", SqlDbType.NVarChar);
+            cmd.Parameters["@SCT"].Value = SCT;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
     }
 }

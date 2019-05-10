@@ -63,7 +63,6 @@
             this.gCtrlTemle.TabIndex = 0;
             this.gCtrlTemle.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvTemle});
-            this.gCtrlTemle.Click += new System.EventHandler(this.gCtrlTemle_Click);
             // 
             // grvTemle
             // 
@@ -123,6 +122,8 @@
             this.TEMGIA.AppearanceHeader.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.TEMGIA.AppearanceHeader.Options.UseFont = true;
             this.TEMGIA.Caption = "Tem Giá";
+            this.TEMGIA.DisplayFormat.FormatString = "{0:n1}";
+            this.TEMGIA.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.TEMGIA.FieldName = "TEMGIA";
             this.TEMGIA.Name = "TEMGIA";
             this.TEMGIA.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {

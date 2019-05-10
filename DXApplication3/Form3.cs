@@ -17,24 +17,18 @@ namespace DXApplication3
 {
     public partial class Form3 : DevExpress.XtraEditors.XtraForm
     {
-
         clBUS _BUS = new clBUS();
         string userNameFrm3 = "";
         int priorityFrm3;
         string addressFile;
-        int SoReport_Frm3 = 2;
         public Form3()
         {
             InitializeComponent();
         }
-
         private void Form3_Load(object sender, EventArgs e)
         {
-           //String KHOA = _BUS.getMaxKhoaTemLe();
-         // MessageBox.Show(radioTemle.EditValue.ToString());
             grvTemle.AddNewRow();
         }
-
         private void btnImport_Click(object sender, EventArgs e)
         {
             try
@@ -47,28 +41,30 @@ namespace DXApplication3
                     OleDbDataAdapter adapter = new OleDbDataAdapter(query, connec);
                     DataTable tblImport = new DataTable();
                     adapter.Fill(tblImport);
+                gCtrlTemle.DataSource = tblImport;
                 if (tblImport.Rows.Count > 0)
                 {
-                    gCtrlTemle.DataSource = tblImport;
-                        DataTable dtall = new DataTable();
-                        DataTable dttemp = new DataTable();
+                    DataTable dtall = new DataTable();
+                    DataTable dttemp = new DataTable();
                     DataTable dttemp1 = new DataTable();
-                    dtall = _BUS.GetdataTemle(grvTemle.GetRowCellValue(0, "MAVT").ToString(), Convert.ToInt32(grvTemle.GetRowCellValue(0, "SOLUONG")), grvTemle.GetRowCellValue(0, "TEMGIA").ToString());
-                    for (int i = 1; i < grvTemle.DataRowCount; i++)
-                {
+                    dtall = _BUS.GetdataTemle("2181502000847", (int)2, "2.5");
+                    for (int i = 0; i < grvTemle.DataRowCount; i++)
+                    {
                         dttemp = _BUS.GetdataTemle(grvTemle.GetRowCellValue(i, "MAVT").ToString(), Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), grvTemle.GetRowCellValue(i, "TEMGIA").ToString());
-                        dtall= dtall.AsEnumerable().Union(dttemp.AsEnumerable()).CopyToDataTable<DataRow>();;
+                        dtall = dtall.AsEnumerable().Union(dttemp.AsEnumerable()).CopyToDataTable<DataRow>();
                     }
-                gCtrlTemle.DataSource = dtall;
-                       TEMGIA.SummaryItem.DisplayFormat = _BUS.getMultipleTotalTemle(grvTemle);
+                    dtall.Rows.Remove(dtall.Rows[0]);
+                    gCtrlTemle.DataSource = dtall;
+                    TEMGIA.SummaryItem.DisplayFormat = _BUS.getMultipleTotalTemle(grvTemle);
                 }
                 else
-                    {
+                {
                     gCtrlTemle.DataSource = null;
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Bạn phải chọn file excel");
             }
         }
@@ -96,15 +92,12 @@ namespace DXApplication3
             {
                 return null;
             }
-
         }
-
         private void oFD_FileOk(object sender, CancelEventArgs e)
         {
             addressFile = oFD.FileName;
             List<string> sheets = getListSheet(addressFile);
         }
-
         private void btnPreview_Click(object sender, EventArgs e)
         {
             try
@@ -113,10 +106,10 @@ namespace DXApplication3
                 {
                     MessageBox.Show("Bạn chưa chọn loại tiền tệ");
                 }
-                else
+                else if (radioTemle.SelectedIndex == 0)
                 {
                     String KHOA = _BUS.getMaxKhoaTemLe();
-                    String Currency= radioTemle.Properties.Items[radioTemle.SelectedIndex].Description;
+                    String Currency = radioTemle.Properties.Items[radioTemle.SelectedIndex].Description;
                     _BUS.Insertlabel_temle(KHOA, userNameFrm3);
                     for (int i = 0; i < grvTemle.DataRowCount; i++)
                     {
@@ -124,19 +117,32 @@ namespace DXApplication3
                             Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), Convert.ToDouble(grvTemle.GetRowCellValue(i, "TEMGIA")), Currency);
                     }
                     Form1 form1 = new Form1();
-                    form1.PassvaluefromForm3(KHOA, Currency, 2, userNameFrm3, priorityFrm3);
+                    form1.PassvaluefromForm3(KHOA, Currency, 4, userNameFrm3, priorityFrm3);
                     form1.Show();
                     this.Hide();
 
+                }
+                else if (radioTemle.SelectedIndex == 1)
+                {
+                    String KHOA = _BUS.getMaxKhoaTemLe();
+                    String Currency = radioTemle.Properties.Items[radioTemle.SelectedIndex].Description;
+                    _BUS.Insertlabel_temle(KHOA, userNameFrm3);
+                    for (int i = 0; i < grvTemle.DataRowCount; i++)
+                    {
+                        _BUS.InsertLabel_temle_detail(KHOA, grvTemle.GetRowCellDisplayText(i, "MAVT"),
+                            Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), Convert.ToDouble(grvTemle.GetRowCellValue(i, "TEMGIA")), Currency);
+                    }
+                    Form1 form1 = new Form1();
+                    form1.PassvaluefromForm3(KHOA, Currency, 3, userNameFrm3, priorityFrm3);
+                    form1.Show();
+                    this.Hide();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
-
         private void Form3_Closing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
@@ -146,11 +152,6 @@ namespace DXApplication3
         {
             userNameFrm3 = userName;
             priorityFrm3 = priority;
-        }
-
-        private void gCtrlTemle_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXApplication3", "DXApplication3\DXApplication3.csproj", "{6F2B8747-FA9D-491F-959A-0D20ABB29705}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsgBox", "MsgBox\MsgBox.csproj", "{2466C7AD-0379-4517-99FF-A1E61C290065}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6F2B8747-FA9D-491F-959A-0D20ABB29705}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F2B8747-FA9D-491F-959A-0D20ABB29705}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F2B8747-FA9D-491F-959A-0D20ABB29705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2466C7AD-0379-4517-99FF-A1E61C290065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2466C7AD-0379-4517-99FF-A1E61C290065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2466C7AD-0379-4517-99FF-A1E61C290065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2466C7AD-0379-4517-99FF-A1E61C290065}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

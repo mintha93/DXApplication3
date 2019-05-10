@@ -133,15 +133,6 @@ namespace DXApplication3
                 }
             }
         }
-        private void teUsername_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)9)
-            {
-                MessageBox.Show("abcd");
-                tePassword.EditValue = "";
-                tePassword.Properties.PasswordChar = '*';
-            }
-        }
         private void XtraForm1_Load(object sender, EventArgs e)
         {
             frmLogin frm = new frmLogin();

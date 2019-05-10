@@ -9,11 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BarcodeLabel;
 using DevExpress.Data;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DXApplication3.BUS;
+using static MsgBox.Class1;
 
 namespace DXApplication3
 {
@@ -21,7 +23,7 @@ namespace DXApplication3
     {
         int SoReport_Frm2 = 0;
         string SCT_Frm2 = "";
-        int Makho_Frm2 = 0;
+        int Cur_Frm2 = 0;
         string userName_frm2;
         int priority_frm2;
         clBUS _BUS = new clBUS();
@@ -60,8 +62,8 @@ namespace DXApplication3
             {
                 tabControl.SelectedTabPage = tabPageDT;
                 gctrlDetail.DataSource = _BUS.GET_VCNB_APP_DETAIL(grvDSach.GetFocusedRowCellDisplayText("SCT"));
-                GIABAN_VND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvDetail);
-                GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
+                GIABAN.SummaryItem.DisplayFormat = _BUS.getMultipleTotal(grvDetail);
+                //GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
             }
             else if (tabControl.SelectedTabPageIndex == 0)
             {
@@ -87,8 +89,8 @@ namespace DXApplication3
             {
                 gctrlDetail.DataSource = _BUS.GET_VCNB_APP_DETAIL(grvDSach.GetFocusedRowCellDisplayText("SCT"));
                 tabControl.SelectedTabPage = tabPageDT;
-                GIABAN_VND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvDetail);
-                GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
+                GIABAN.SummaryItem.DisplayFormat = _BUS.getMultipleTotal(grvDetail);
+                //GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
             }
             catch (Exception ex)
             {
@@ -118,8 +120,8 @@ namespace DXApplication3
                 gctrlDSach.DataSource = _BUS.getVCNB(dEdatefrom.DateTime.Date.ToString("yyyy/MM/dd"), dEdateto.DateTime.Date.ToString("yyyy/MM/dd"));
                 grvDSach.Columns[4].Visible = false;
                 grvDSach.Columns[6].Visible = false;
-                GIABAN_VND.SummaryItem.DisplayFormat = _BUS.getMultipleTotalVND(grvDetail);
-                GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
+                GIABAN.SummaryItem.DisplayFormat = _BUS.getMultipleTotal(grvDetail);
+                //GIABAN_NT.SummaryItem.DisplayFormat = _BUS.getMultipleTotalUSD(grvDetail);
                 lblWelcome.Text = "Hi "+userName_frm2+" !";
             }
             catch (Exception ex)
@@ -153,12 +155,16 @@ namespace DXApplication3
             form3.PassvaluefromForm2(userName_frm2, priority_frm2);
             form3.Show();
         }
+        private void btnIntemD6(object sender, EventArgs e)
+        {
+            FormD6 formD6 = new FormD6();
+            formD6.PassvaluefromForm2(userName_frm2, priority_frm2);
+            formD6.Show();
+        }
         private void barbtnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Environment.Exit(0);
         }
-
-    
 
         private void grvDSach_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
@@ -172,13 +178,36 @@ namespace DXApplication3
         {
             try
             {
-                SoReport_Frm2 = 1;
-                SCT_Frm2 = grvDSach.GetFocusedRowCellDisplayText("SCT");
-                Makho_Frm2 = Convert.ToInt16(grvDSach.GetFocusedRowCellDisplayText("MAKHO2"));
-                Form1 form1 = new Form1();
-                form1.PassvaluefromForm2(SCT_Frm2, Makho_Frm2, SoReport_Frm2,userName_frm2,priority_frm2);
-                form1.Show();
-                //this.Hide();
+
+                InputBox.SetLanguage(InputBox.Language.English);
+                DialogResult res = InputBox.ShowDialog("Hãy chọn đơn vị tiền tệ:", "MessageBox",
+                    InputBox.Icon.Question,
+                    InputBox.Buttons.OkCancel,
+                    InputBox.Type.ComboBox,
+                    new string[] { "USD", "VND" },
+                    true,
+                    new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold));
+                if (res == System.Windows.Forms.DialogResult.OK || res == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (InputBox.ResultValue == "VND")
+                    {
+                        SoReport_Frm2 = 1;
+                        SCT_Frm2 = grvDSach.GetFocusedRowCellDisplayText("SCT");
+                        Cur_Frm2 = 1;
+                        Form1 form1 = new Form1();
+                        form1.PassvaluefromForm2(SCT_Frm2, Cur_Frm2, SoReport_Frm2, userName_frm2, priority_frm2);
+                        form1.Show();
+                    }
+                    else if (InputBox.ResultValue == "USD") 
+                    {
+                        SoReport_Frm2 = 2;
+                        SCT_Frm2 = grvDSach.GetFocusedRowCellDisplayText("SCT");
+                        Cur_Frm2 = 2;
+                        Form1 form1 = new Form1();
+                        form1.PassvaluefromForm2(SCT_Frm2, Cur_Frm2, SoReport_Frm2, userName_frm2, priority_frm2);
+                        form1.Show();
+                    }
+                }
             }
             catch (Exception)
             {
