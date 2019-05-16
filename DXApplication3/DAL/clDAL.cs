@@ -13,18 +13,8 @@ namespace DXApplication3.DAL
         public void InsertLabelNhapxuat( String SCT,String userName)
         {
                 _conn = ConnectSql.getConnect();
-                SqlCommand cmd = new SqlCommand("if (select 1 from dbo.LABEL_NHAPXUAT where SCT = @SCT and DONE=0)=1 "
-                                                    +"begin "
-                                                     +"update dbo.LABEL_NHAPXUAT "
-                                                     +"set INLAI = INLAI + 1,DONE=1,COMPUTERNAME=HOST_NAME(),USERNAME=@USERNAME,GIOIN = GETDATE() "
-                                                     +"where SCT = @SCT "
-                                                    +"end "
-                                                 +"else "
-                                                    +"begin "
-                                                    +"INSERT INTO dbo.LABEL_NHAPXUAT SELECT SCT, 1, NGAY, SOLUONG, HOST_NAME(), @USERNAME, GETDATE(),0 FROM NHAPXUAT WHERE SCT = @SCT "
-                                                    +"end"
-                                                    , _conn);
-                cmd.CommandType = CommandType.Text;
+                SqlCommand cmd = new SqlCommand("GET_VCNB_APP_INSERT", _conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@SCT", SCT);
                 cmd.Parameters.AddWithValue("@USERNAME", userName);
             cmd.ExecuteNonQuery();     
@@ -219,14 +209,8 @@ namespace DXApplication3.DAL
         public DataTable GetDataD6(String SCT)
         {
             _conn = ConnectSql.getConnect();
-            SqlCommand cmd = new SqlCommand("SELECT B.MAVT, D.TENVT, B.SOLUONG, B.GIABAN2 AS TEMGIA,A.DGIAI AS DIENGIAI"
-                                                + " FROM NHAPXUAT A"
-                                                     +" JOIN dbo.NHAPXUAT_CT B ON B.KHOA = A.KHOA AND B.LOC = A.LOC"
-                                                     +" JOIN dbo.DM_HH_CT C ON C.MABH = B.MAVT"
-                                                     +" JOIN dbo.DM_HH D ON D.MAVT = C.MAVT"
-                                                +" WHERE A.LCT = 'CKHO' AND A.MAKHO2 = 43 AND A.SCT = @SCT"
-                                                +" ORDER BY B.MAVT ", _conn);
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = new SqlCommand("GET_VCNB_APP_DETAIL_TEMCONHO", _conn);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@SCT", SqlDbType.NVarChar);
             cmd.Parameters["@SCT"].Value = SCT;
             SqlDataAdapter da = new SqlDataAdapter(cmd);

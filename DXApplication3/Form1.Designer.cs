@@ -120,6 +120,7 @@
             this.Controls.Add(this.btnUnlock);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.sidePanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.SkinName = "Money Twins";
             this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.Name = "Form1";

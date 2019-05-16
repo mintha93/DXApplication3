@@ -82,7 +82,7 @@ namespace BarcodeLabel
                     DataTable dtall = new DataTable();
                     DataTable dttemp = new DataTable();
                     DataTable dttemp1 = new DataTable();
-                    dtall = _BUS.GetdataTemle("2181502000847", (int)2, "2.5");
+                    dtall = _BUS.GetdataTemle("2182307000766", (int)2, "2.5");
                     for (int i = 0; i < grvD6.DataRowCount; i++)
                     {
                         dttemp = _BUS.GetdataTemle(grvD6.GetRowCellValue(i, "MAVT").ToString(), Convert.ToInt32(grvD6.GetRowCellValue(i, "SOLUONG")), grvD6.GetRowCellValue(i, "TEMGIA").ToString());

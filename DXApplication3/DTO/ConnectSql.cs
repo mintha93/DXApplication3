@@ -43,7 +43,7 @@ namespace DXApplication3.DTO
             List<string> strList = new List<string>();
             FileStream fs = new FileStream("D:\\Intem\\Report\\Path.txt", FileMode.Open);
             StreamReader rd = new StreamReader(fs, Encoding.UTF8);
-            String line1 = rd.ReadLine();// ReadLine() chỉ đọc 1 dòng đầu thoy, ReadToEnd là đọc hết
+            String line1 = rd.ReadLine();
             String line2 = rd.ReadLine();
             strList.Add(line1.Substring(7, line1.Length - 7));
             strList.Add(line2.Substring(17, line2.Length - 17));

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
@@ -20,6 +21,7 @@ namespace DXApplication3
         int Cur_Frm1 = 1;
         int Soreport_Frm1;
         int priority_Frm1;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,16 +30,25 @@ namespace DXApplication3
         {
             try
             {
+                string connectString = _BUS.getPath(1);
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
+                // Retrieve the DataSource property.    
+                string ipAddress = builder.DataSource;
+                string databaseName = builder.InitialCatalog;
+                string userName = builder.UserID;
+                string passWord = builder.Password;
+
+
                 ConnectionInfo crconnectioninfo = new ConnectionInfo();
                 TableLogOnInfos crtablelogoninfos = new TableLogOnInfos();
                 TableLogOnInfo crtablelogoninfo = new TableLogOnInfo();
                 lblSochungtu.Text = SCT_Frm1;
                 reportDocument.Load(@""+ _BUS.getPath(0) + GetReportName(Soreport_Frm1));
                 Tables CrTables;
-                crconnectioninfo.ServerName = "192.168.68.252";
-                crconnectioninfo.DatabaseName = "DUYANH";
-                crconnectioninfo.UserID = "sa";
-                crconnectioninfo.Password = "SQL@123@";
+                crconnectioninfo.ServerName = ipAddress;
+                crconnectioninfo.DatabaseName = databaseName;
+                crconnectioninfo.UserID = userName;
+                crconnectioninfo.Password = passWord;
                 CrTables = reportDocument.Database.Tables;
 
                 foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables)
@@ -49,7 +60,7 @@ namespace DXApplication3
                 try
                 {
                     reportDocument.Load(@"" + _BUS.getPath(0) + GetReportName(Soreport_Frm1));
-                    reportDocument.SetDatabaseLogon("sa", "SQL@123@", "192.168.68.252", "DUYANH", false);
+                    reportDocument.SetDatabaseLogon(userName, passWord, ipAddress, databaseName, false);
                     if (Soreport_Frm1 == 1|| Soreport_Frm1 == 2)
                     {
                         reportDocument.SetParameterValue("@SCT", SCT_Frm1);

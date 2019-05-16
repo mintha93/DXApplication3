@@ -53,6 +53,7 @@
             this.DVT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SO_LUONG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GIABAN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.CURRENCY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -83,7 +84,6 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.lblWelcome = new DevExpress.XtraEditors.LabelControl();
-            this.CURRENCY = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
@@ -327,7 +327,6 @@
             this.CURRENCY});
             this.grvDetail.GridControl = this.gctrlDetail;
             this.grvDetail.Name = "grvDetail";
-            this.grvDetail.OptionsBehavior.Editable = false;
             this.grvDetail.OptionsView.ColumnAutoWidth = false;
             this.grvDetail.OptionsView.ShowFooter = true;
             // 
@@ -390,6 +389,14 @@
             this.GIABAN.Visible = true;
             this.GIABAN.VisibleIndex = 5;
             this.GIABAN.Width = 118;
+            // 
+            // CURRENCY
+            // 
+            this.CURRENCY.Caption = "Đơn vị tiền tệ";
+            this.CURRENCY.FieldName = "CURRENCY";
+            this.CURRENCY.Name = "CURRENCY";
+            this.CURRENCY.Visible = true;
+            this.CURRENCY.VisibleIndex = 6;
             // 
             // btnPreview
             // 
@@ -683,14 +690,6 @@
             this.lblWelcome.Size = new System.Drawing.Size(101, 18);
             this.lblWelcome.TabIndex = 18;
             this.lblWelcome.Text = "-------------------------";
-            // 
-            // CURRENCY
-            // 
-            this.CURRENCY.Caption = "Đơn vị tiền tệ";
-            this.CURRENCY.FieldName = "CURRENCY";
-            this.CURRENCY.Name = "CURRENCY";
-            this.CURRENCY.Visible = true;
-            this.CURRENCY.VisibleIndex = 6;
             // 
             // Form2
             // 

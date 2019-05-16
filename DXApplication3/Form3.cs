@@ -47,7 +47,7 @@ namespace DXApplication3
                     DataTable dtall = new DataTable();
                     DataTable dttemp = new DataTable();
                     DataTable dttemp1 = new DataTable();
-                    dtall = _BUS.GetdataTemle("2181502000847", (int)2, "2.5");
+                    dtall = _BUS.GetdataTemle("2182307000766", (int)2, "2.5");
                     for (int i = 0; i < grvTemle.DataRowCount; i++)
                     {
                         dttemp = _BUS.GetdataTemle(grvTemle.GetRowCellValue(i, "MAVT").ToString(), Convert.ToInt32(grvTemle.GetRowCellValue(i, "SOLUONG")), grvTemle.GetRowCellValue(i, "TEMGIA").ToString());

@@ -56,12 +56,12 @@
             this.teUsername.EditValue = "USERNAME";
             this.teUsername.Location = new System.Drawing.Point(144, 111);
             this.teUsername.Name = "teUsername";
-            this.teUsername.Properties.Appearance.Font = new System.Drawing.Font("Vani", 13.75F);
+            this.teUsername.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.75F);
             this.teUsername.Properties.Appearance.Options.UseFont = true;
             this.teUsername.Properties.Appearance.Options.UseTextOptions = true;
             this.teUsername.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.teUsername.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.teUsername.Size = new System.Drawing.Size(221, 38);
+            this.teUsername.Size = new System.Drawing.Size(221, 28);
             this.teUsername.TabIndex = 1;
             this.teUsername.EditValueChanged += new System.EventHandler(this.teUsername_EditValueChanged);
             this.teUsername.Click += new System.EventHandler(this.teUsername_Click);
@@ -72,11 +72,11 @@
             this.tePassword.EditValue = "PASSWORD";
             this.tePassword.Location = new System.Drawing.Point(144, 155);
             this.tePassword.Name = "tePassword";
-            this.tePassword.Properties.Appearance.Font = new System.Drawing.Font("Vani", 13.75F);
+            this.tePassword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.75F);
             this.tePassword.Properties.Appearance.Options.UseFont = true;
             this.tePassword.Properties.Appearance.Options.UseTextOptions = true;
             this.tePassword.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tePassword.Size = new System.Drawing.Size(221, 38);
+            this.tePassword.Size = new System.Drawing.Size(221, 28);
             this.tePassword.TabIndex = 2;
             this.tePassword.Click += new System.EventHandler(this.tePassword_Click);
             this.tePassword.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tePassword_PreviewKeyDown);
@@ -103,6 +103,7 @@
             this.Controls.Add(this.tePassword);
             this.Controls.Add(this.teUsername);
             this.Controls.Add(this.btnSignin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.SkinMaskColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(77)))), ((int)(((byte)(153)))));
             this.LookAndFeel.SkinName = "Springtime";
             this.LookAndFeel.TouchUIMode = DevExpress.Utils.DefaultBoolean.False;

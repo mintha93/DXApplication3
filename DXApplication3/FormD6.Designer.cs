@@ -282,7 +282,9 @@
             this.ClientSize = new System.Drawing.Size(815, 462);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormD6";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "In tem cỡ nhỏ";
             this.Load += new System.EventHandler(this.FormD6_Load);
             this.panel2.ResumeLayout(false);
